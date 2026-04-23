@@ -1,0 +1,9 @@
+{
+  "name": "ai-daily-digest",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "bun test",
+    "publish:feishu": "bun run scripts/publish-briefings.ts"
+  }
+}

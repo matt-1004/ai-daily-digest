@@ -1,0 +1,9 @@
+.DS_Store
+.env
+.env.*
+.lark-cli-app/
+node_modules/
+coverage/
+dist/
+tmp/
+*.log

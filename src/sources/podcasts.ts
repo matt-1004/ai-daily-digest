@@ -1,0 +1,60 @@
+import type { SourceDefinition } from "../types/content.ts";
+
+export const PODCAST_SOURCES: SourceDefinition[] = [
+  {
+    id: "openai-podcast",
+    name: "The OpenAI Podcast",
+    kind: "podcast",
+    adapter: "podcast_feed",
+    channelUrl: "https://openai.com/podcast/",
+    laneHint: "weekly",
+  },
+  {
+    id: "google-deepmind-podcast",
+    name: "Google DeepMind Podcast",
+    kind: "podcast",
+    adapter: "podcast_feed",
+    channelUrl: "https://deepmind.google/the-podcast/",
+    laneHint: "weekly",
+  },
+  {
+    id: "nvidia-ai-podcast",
+    name: "NVIDIA AI Podcast",
+    kind: "podcast",
+    adapter: "podcast_feed",
+    channelUrl: "https://ai-podcast.nvidia.com/",
+    laneHint: "weekly",
+  },
+  {
+    id: "latent-space-podcast",
+    name: "Latent Space",
+    kind: "podcast",
+    adapter: "podcast_feed",
+    channelUrl: "https://www.latent.space/podcast",
+    laneHint: "weekly",
+  },
+  {
+    id: "twiml-ai-podcast",
+    name: "TWIML AI Podcast",
+    kind: "podcast",
+    adapter: "podcast_feed",
+    channelUrl: "https://twimlai.com/podcasts/",
+    laneHint: "weekly",
+  },
+  {
+    id: "cognitive-revolution",
+    name: "The Cognitive Revolution",
+    kind: "podcast",
+    adapter: "podcast_feed",
+    channelUrl: "https://www.cognitiverevolution.ai/",
+    laneHint: "weekly",
+  },
+  {
+    id: "no-priors",
+    name: "No Priors",
+    kind: "podcast",
+    adapter: "podcast_feed",
+    channelUrl: "https://www.no-priors.com/",
+    laneHint: "weekly",
+  },
+];

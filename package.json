@@ -1,9 +1,11 @@
 {
   "name": "ai-daily-digest",
+  "version": "0.1.1",
   "private": true,
   "type": "module",
   "scripts": {
     "test": "bun test",
-    "publish:feishu": "bun run scripts/publish-briefings.ts"
+    "publish:feishu": "bun run scripts/publish-briefings.ts",
+    "publish:codex": "./scripts/codex-daily-run.sh"
   }
 }

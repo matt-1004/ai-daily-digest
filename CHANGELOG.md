@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0 - 2026-04-25
+
+- Add runnable source health checks with per-source progress and timeout handling.
+- Add real adapters for GitHub releases, arXiv recent listings, YouTube channels, and X accounts.
+- Use the local Chrome/CDP session for YouTube and X so logged-in sources can be collected without storing cookies in git.
+- Restrict the scheduled catalog to sources that passed real collection checks.
+- Document source verification and Chrome/CDP requirements.
+
 ## 0.1.1 - 2026-04-24
 
 - Add a local Codex/Lark wrapper for scheduled Feishu publishing.

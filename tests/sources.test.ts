@@ -9,17 +9,21 @@ import {
 } from "../src/sources/index.ts";
 
 describe("source catalog", () => {
-  test("includes official, github, papers, media, podcasts, youtube, social, and blogs", () => {
+  test("includes verified official, github, papers, youtube, social, and blog sources", () => {
     const ids = getDefaultSourceCatalog().map((source) => source.id);
 
     expect(ids).toContain("openai-newsroom");
     expect(ids).toContain("github-openai-python");
     expect(ids).toContain("arxiv-cs-ai");
-    expect(ids).toContain("techcrunch-ai");
-    expect(ids).toContain("openai-podcast");
     expect(ids).toContain("openai-youtube");
     expect(ids).toContain("openai-x");
     expect(ids).toContain("simon-willison-blog");
+    expect(ids).toContain("latent-space-blog");
+    expect(ids).not.toContain("huggingface-blog");
+    expect(ids).not.toContain("google-deepmind-blog");
+    expect(ids).not.toContain("techcrunch-ai");
+    expect(ids).not.toContain("openai-podcast");
+    expect(ids).not.toContain("gwern-blog");
   });
 
   test("exposes daily-only sources without watchlist accounts", () => {
@@ -31,10 +35,10 @@ describe("source catalog", () => {
     expect(ids).not.toContain("openai-podcast");
   });
 
-  test("exposes weekly sources including podcasts and blogs", () => {
+  test("exposes weekly sources including youtube and blogs", () => {
     const ids = getWeeklySourceCatalog().map((source) => source.id);
 
-    expect(ids).toContain("openai-podcast");
+    expect(ids).toContain("openai-youtube");
     expect(ids).toContain("simon-willison-blog");
     expect(ids).not.toContain("openai-x");
   });
@@ -55,10 +59,12 @@ describe("source catalog", () => {
     const adapters = new Set(getAutomatableSourceCatalog().map((source) => source.adapter));
 
     expect(Array.from(adapters).sort()).toEqual([
+      "arxiv_recent",
       "atom",
       "github_releases",
-      "podcast_feed",
       "rss",
+      "x_account",
+      "youtube_channel",
     ]);
   });
 });

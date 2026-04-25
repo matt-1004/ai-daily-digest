@@ -7,7 +7,7 @@ Trust-aware AI briefing pipeline for two outputs:
 
 ## What It Does
 
-- collects from official sites, GitHub releases, papers, media, podcasts, and blog sources
+- collects from official sites, GitHub releases, arXiv, YouTube, X watchlist accounts, and selected independent blogs
 - classifies sources by trust tier
 - verifies whether an item can enter daily or weekly output
 - deduplicates around canonical URLs and original sources
@@ -33,11 +33,24 @@ docs/
 
 - `bun`
 - `lark-cli` for Feishu publishing
+- Chrome remote debugging for YouTube/X sources, through the local Codex web-access CDP proxy
 
 ## Run
 
 ```bash
 bun test
+```
+
+Check every configured source with real requests:
+
+```bash
+bun run sources:check
+```
+
+YouTube and X use the user's logged-in Chrome session through `http://localhost:3456`. Run the Codex web-access dependency check first if the proxy is not already ready:
+
+```bash
+node /Users/yongku/.agents/skills/web-access/scripts/check-deps.mjs
 ```
 
 Generate and publish Feishu docs:
@@ -72,3 +85,4 @@ Set `LARK_PROFILE=...` to use a different lark-cli profile.
 - Secrets are read from environment variables and should not be committed.
 - `.lark-cli-app/` is local-only runtime config and is ignored by git.
 - The current source catalog favors trust and signal over raw volume.
+- Media, podcast, Hugging Face RSS, Google DeepMind blog, and Gwern sources are intentionally excluded until they are reliable enough for scheduled runs.

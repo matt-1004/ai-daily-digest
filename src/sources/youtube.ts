@@ -7,6 +7,7 @@ export const YOUTUBE_SOURCES: SourceDefinition[] = [
     kind: "youtube",
     adapter: "youtube_channel",
     channelUrl: "https://www.youtube.com/@OpenAI",
+    fetchUrl: "https://www.youtube.com/feeds/videos.xml?handle=@OpenAI",
     laneHint: "weekly",
   },
   {
@@ -14,7 +15,8 @@ export const YOUTUBE_SOURCES: SourceDefinition[] = [
     name: "Anthropic YouTube",
     kind: "youtube",
     adapter: "youtube_channel",
-    channelUrl: "https://www.youtube.com/@AnthropicAI",
+    channelUrl: "https://www.youtube.com/@anthropic-ai",
+    fetchUrl: "https://www.youtube.com/feeds/videos.xml?handle=@anthropic-ai",
     laneHint: "weekly",
   },
   {
@@ -23,6 +25,7 @@ export const YOUTUBE_SOURCES: SourceDefinition[] = [
     kind: "youtube",
     adapter: "youtube_channel",
     channelUrl: "https://www.youtube.com/@GoogleDeepMind",
+    fetchUrl: "https://www.youtube.com/feeds/videos.xml?handle=@GoogleDeepMind",
     laneHint: "weekly",
   },
   {
@@ -31,6 +34,7 @@ export const YOUTUBE_SOURCES: SourceDefinition[] = [
     kind: "youtube",
     adapter: "youtube_channel",
     channelUrl: "https://www.youtube.com/@AIatMeta",
+    fetchUrl: "https://www.youtube.com/feeds/videos.xml?handle=@AIatMeta",
     laneHint: "weekly",
   },
 ];

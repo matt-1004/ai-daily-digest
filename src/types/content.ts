@@ -21,9 +21,11 @@ export type AdapterKind =
   | "atom"
   | "github_releases"
   | "web_page"
+  | "arxiv"
   | "podcast_feed"
   | "youtube_channel"
-  | "x_account";
+  | "x_account"
+  | "arxiv_recent";
 
 export interface SourceRef {
   name: string;

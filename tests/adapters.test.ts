@@ -3,6 +3,7 @@ import { describe, expect, test } from "bun:test";
 import { collectFromCatalog, collectFromSource } from "../src/sources/index.ts";
 import type { SourceDefinition } from "../src/types/content.ts";
 import { toGithubReleasesFeedUrl } from "../src/sources/adapters/github.ts";
+import { parseFeed } from "../src/sources/adapters/feed.ts";
 
 function response(body: string) {
   return {
@@ -55,13 +56,13 @@ describe("source adapters", () => {
     );
   });
 
-  test("collects Atom entries from GitHub releases", async () => {
+  test("falls back to Atom entries for GitHub releases", async () => {
     const source: SourceDefinition = {
       id: "test-github",
       name: "OpenAI Python Releases",
       kind: "github_release",
       adapter: "github_releases",
-      channelUrl: "https://github.com/openai/openai-python",
+      channelUrl: "https://github.com/not-a-real-owner/not-a-real-repo",
       laneHint: "daily",
     };
 
@@ -81,7 +82,7 @@ describe("source adapters", () => {
       },
     });
 
-    expect(requestedUrl).toBe("https://github.com/openai/openai-python/releases.atom");
+    expect(requestedUrl).toBe("https://github.com/not-a-real-owner/not-a-real-repo/releases.atom");
     expect(items[0]?.title).toBe("v2.32.0");
   });
 
@@ -113,6 +114,32 @@ describe("source adapters", () => {
       "https://www.anthropic.com/news/model-context-protocol",
       "https://www.anthropic.com/news/claude-updates",
     ]);
+  });
+
+  test("parses YouTube Atom feed entries", () => {
+    const source: SourceDefinition = {
+      id: "test-youtube",
+      name: "Test YouTube",
+      kind: "youtube",
+      adapter: "youtube_channel",
+      channelUrl: "https://www.youtube.com/@test",
+      fetchUrl: "https://www.youtube.com/feeds/videos.xml?handle=@test",
+      laneHint: "weekly",
+    };
+
+    const items = parseFeed(`<?xml version="1.0"?>
+      <feed xmlns="http://www.w3.org/2005/Atom">
+        <entry>
+          <title>Model update walkthrough</title>
+          <link rel="alternate" href="https://www.youtube.com/watch?v=abc123" />
+          <published>2026-04-24T00:00:00Z</published>
+        </entry>
+      </feed>`, source);
+
+    expect(items[0]).toMatchObject({
+      title: "Model update walkthrough",
+      url: "https://www.youtube.com/watch?v=abc123",
+    });
   });
 
   test("continues collecting when one source fails", async () => {

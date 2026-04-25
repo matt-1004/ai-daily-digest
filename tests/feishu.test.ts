@@ -1,6 +1,7 @@
 import { describe, expect, test } from "bun:test";
 
 import {
+  FEISHU_PUBLISHER_APP_ID,
   getFeishuBriefingDocTargetsFromEnv,
   getFeishuPublisherConfigFromEnv,
 } from "../src/integrations/feishu.ts";
@@ -8,12 +9,12 @@ import {
 describe("feishu config", () => {
   test("reads app credentials from env", () => {
     const config = getFeishuPublisherConfigFromEnv({
-      FEISHU_APP_ID: "cli_test",
+      FEISHU_APP_ID: FEISHU_PUBLISHER_APP_ID,
       FEISHU_APP_SECRET: "secret",
     });
 
     expect(config).toEqual({
-      appId: "cli_test",
+      appId: FEISHU_PUBLISHER_APP_ID,
       appSecret: "secret",
       brand: "feishu",
     });
@@ -22,9 +23,18 @@ describe("feishu config", () => {
   test("returns null when credentials are incomplete", () => {
     expect(
       getFeishuPublisherConfigFromEnv({
-        FEISHU_APP_ID: "cli_test",
+        FEISHU_APP_ID: FEISHU_PUBLISHER_APP_ID,
       }),
     ).toBeNull();
+  });
+
+  test("rejects credentials for any other bot app", () => {
+    expect(() =>
+      getFeishuPublisherConfigFromEnv({
+        FEISHU_APP_ID: "cli_other_bot",
+        FEISHU_APP_SECRET: "secret",
+      }),
+    ).toThrow("Refusing to publish");
   });
 });
 

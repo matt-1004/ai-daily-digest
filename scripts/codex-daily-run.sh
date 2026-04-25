@@ -4,14 +4,16 @@ set -euo pipefail
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 STATE_DIR="${HOME}/.codex/ai-daily-digest"
 STATE_FILE="${STATE_DIR}/doc-targets.env"
-LARK_PROFILE="${LARK_PROFILE:-content-collector-bot}"
 EXPECTED_LARK_PROFILE="content-collector-bot"
+EXPECTED_LARK_APP_ID="cli_a92fdd8840f99bc9"
 
-if [[ "${LARK_PROFILE}" != "${EXPECTED_LARK_PROFILE}" && "${ALLOW_LARK_PROFILE_OVERRIDE:-}" != "1" ]]; then
+if [[ -n "${LARK_PROFILE:-}" && "${LARK_PROFILE}" != "${EXPECTED_LARK_PROFILE}" ]]; then
   echo "Refusing to publish with LARK_PROFILE=${LARK_PROFILE}. Expected ${EXPECTED_LARK_PROFILE}." >&2
-  echo "Set ALLOW_LARK_PROFILE_OVERRIDE=1 only for an intentional one-off bot change." >&2
   exit 1
 fi
+
+LARK_PROFILE="${EXPECTED_LARK_PROFILE}"
+export LARK_PROFILE
 
 mkdir -p "${STATE_DIR}"
 chmod 700 "${STATE_DIR}"
@@ -32,6 +34,23 @@ if [[ ! -f "${HOME}/.lark-cli/config.json" ]]; then
   echo "Missing ${HOME}/.lark-cli/config.json. Run lark-cli config init first." >&2
   exit 1
 fi
+
+node - "${HOME}/.lark-cli/config.json" "${EXPECTED_LARK_PROFILE}" "${EXPECTED_LARK_APP_ID}" <<'NODE'
+const fs = require("node:fs");
+const [configPath, expectedProfile, expectedAppId] = process.argv.slice(2);
+const config = JSON.parse(fs.readFileSync(configPath, "utf8"));
+const app = (config.apps || []).find((item) => item.name === expectedProfile || item.appName === expectedProfile);
+
+if (!app) {
+  console.error(`Missing required lark-cli profile: ${expectedProfile}`);
+  process.exit(1);
+}
+
+if (app.appId !== expectedAppId) {
+  console.error(`Refusing to publish: ${expectedProfile} points to ${app.appId}, expected ${expectedAppId}.`);
+  process.exit(1);
+}
+NODE
 
 if [[ -f "${STATE_FILE}" ]]; then
   # shellcheck disable=SC1090

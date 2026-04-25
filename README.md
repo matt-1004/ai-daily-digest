@@ -78,7 +78,9 @@ The wrapper is intended for local scheduled execution. It:
 - stores created Feishu document targets in `~/.codex/ai-daily-digest/doc-targets.env`
 - overwrites the same daily and weekly documents on later runs
 
-The Feishu publish mechanism is `lark-cli docs +update --profile content-collector-bot --as bot`, so scheduled runs update the existing docs as that bot instead of sending IM messages. Set `ALLOW_LARK_PROFILE_OVERRIDE=1 LARK_PROFILE=...` only for an intentional one-off bot change.
+The Feishu publish mechanism is `lark-cli docs +update --profile content-collector-bot --as bot`, so scheduled runs update the existing docs as that bot instead of sending IM messages. The wrapper also verifies that `content-collector-bot` points to app ID `cli_a92fdd8840f99bc9`.
+
+Publishing is intentionally locked to that bot. If `LARK_PROFILE` points to another profile, or direct `FEISHU_APP_ID` credentials point to another app, the publisher exits before touching any Feishu document.
 
 ## Notes
 

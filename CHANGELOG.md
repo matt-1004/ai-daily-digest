@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.2 - 2026-04-25
+
+- Lock Feishu publishing to the `content-collector-bot` app ID `cli_a92fdd8840f99bc9`.
+- Reject both lark-cli profile drift and direct `FEISHU_APP_ID` publishing with any other bot.
+- Remove the one-off profile override path so the digest cannot accidentally publish through another bot.
+
 ## 0.2.1 - 2026-04-25
 
 - Pin the scheduled Feishu publisher to the `content-collector-bot` lark-cli profile.

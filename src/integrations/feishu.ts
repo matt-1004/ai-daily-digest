@@ -14,6 +14,9 @@ export interface FeishuPublisherConfig {
   brand?: "feishu" | "lark";
 }
 
+export const FEISHU_PUBLISHER_PROFILE = "content-collector-bot";
+export const FEISHU_PUBLISHER_APP_ID = "cli_a92fdd8840f99bc9";
+
 export interface FeishuBriefingDocTargets {
   dailyDocId?: string;
   weeklyDocId?: string;
@@ -41,6 +44,13 @@ export function getFeishuPublisherConfigFromEnv(
   const appId = env.FEISHU_APP_ID?.trim();
   const appSecret = env.FEISHU_APP_SECRET?.trim();
   if (!appId || !appSecret) return null;
+
+  const expectedAppId = env.FEISHU_EXPECTED_APP_ID?.trim() || FEISHU_PUBLISHER_APP_ID;
+  if (appId !== expectedAppId) {
+    throw new Error(
+      `Refusing to publish with FEISHU_APP_ID=${appId}. Expected ${expectedAppId} (${FEISHU_PUBLISHER_PROFILE}).`,
+    );
+  }
 
   return {
     appId,

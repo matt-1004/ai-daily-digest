@@ -74,11 +74,11 @@ bun run publish:codex
 The wrapper is intended for local scheduled execution. It:
 
 - fast-forwards the checked out upstream branch before publishing
-- uses the `content-collector-bot` lark-cli profile by default
+- uses the `content-collector-bot` lark-cli profile and refuses accidental profile changes
 - stores created Feishu document targets in `~/.codex/ai-daily-digest/doc-targets.env`
 - overwrites the same daily and weekly documents on later runs
 
-Set `LARK_PROFILE=...` to use a different lark-cli profile.
+The Feishu publish mechanism is `lark-cli docs +update --profile content-collector-bot --as bot`, so scheduled runs update the existing docs as that bot instead of sending IM messages. Set `ALLOW_LARK_PROFILE_OVERRIDE=1 LARK_PROFILE=...` only for an intentional one-off bot change.
 
 ## Notes
 

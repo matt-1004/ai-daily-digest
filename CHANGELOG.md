@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.1 - 2026-04-25
+
+- Pin the scheduled Feishu publisher to the `content-collector-bot` lark-cli profile.
+- Refuse accidental bot/profile changes unless `ALLOW_LARK_PROFILE_OVERRIDE=1` is set explicitly.
+
 ## 0.2.0 - 2026-04-25
 
 - Add runnable source health checks with per-source progress and timeout handling.

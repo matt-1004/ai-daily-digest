@@ -5,6 +5,13 @@ REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 STATE_DIR="${HOME}/.codex/ai-daily-digest"
 STATE_FILE="${STATE_DIR}/doc-targets.env"
 LARK_PROFILE="${LARK_PROFILE:-content-collector-bot}"
+EXPECTED_LARK_PROFILE="content-collector-bot"
+
+if [[ "${LARK_PROFILE}" != "${EXPECTED_LARK_PROFILE}" && "${ALLOW_LARK_PROFILE_OVERRIDE:-}" != "1" ]]; then
+  echo "Refusing to publish with LARK_PROFILE=${LARK_PROFILE}. Expected ${EXPECTED_LARK_PROFILE}." >&2
+  echo "Set ALLOW_LARK_PROFILE_OVERRIDE=1 only for an intentional one-off bot change." >&2
+  exit 1
+fi
 
 mkdir -p "${STATE_DIR}"
 chmod 700 "${STATE_DIR}"

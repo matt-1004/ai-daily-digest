@@ -1,0 +1,171 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1100" viewBox="0 0 1600 1100" role="img" aria-labelledby="title desc">
+  <title id="title">二零二六年四月二十五日会话成果总览</title>
+  <desc id="desc">展示人工智能日报项目的信息源、处理链路、飞书机器人隔离、自动化和发布状态。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#08111f"/>
+      <stop offset="0.52" stop-color="#10253f"/>
+      <stop offset="1" stop-color="#061018"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#56f6ff"/>
+      <stop offset="1" stop-color="#2b8cff"/>
+    </linearGradient>
+    <linearGradient id="violet" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b58cff"/>
+      <stop offset="1" stop-color="#ff6bd6"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#79ffc8"/>
+      <stop offset="1" stop-color="#36c96f"/>
+    </linearGradient>
+    <linearGradient id="amber" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffd66e"/>
+      <stop offset="1" stop-color="#ff8f3d"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="soft" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#000000" flood-opacity="0.34"/>
+    </filter>
+    <marker id="arrowCyan" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="12" markerHeight="12" orient="auto-start-reverse">
+      <path d="M1,1 L11,6 L1,11 Z" fill="#56f6ff"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="12" markerHeight="12" orient="auto-start-reverse">
+      <path d="M1,1 L11,6 L1,11 Z" fill="#79ffc8"/>
+    </marker>
+    <style>
+      .page { fill: url(#bg); }
+      .grid { stroke: rgba(127, 220, 255, 0.09); stroke-width: 1; }
+      .halo { fill: none; stroke-width: 2; opacity: 0.45; filter: url(#glow); }
+      .title { fill: #f5fbff; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 54px; font-weight: 800; letter-spacing: 0; }
+      .subtitle { fill: #b9d7e8; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 22px; letter-spacing: 0; }
+      .section { fill: #eff9ff; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 26px; font-weight: 760; letter-spacing: 0; }
+      .label { fill: #dff4ff; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 20px; font-weight: 680; letter-spacing: 0; }
+      .small { fill: #a7c4d6; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 16px; letter-spacing: 0; }
+      .tiny { fill: #91adbf; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 14px; letter-spacing: 0; }
+      .note { fill: #cfe9f6; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 18px; letter-spacing: 0; }
+      .panel { fill: rgba(10, 27, 46, 0.84); stroke: rgba(117, 232, 255, 0.24); stroke-width: 1.5; rx: 18; filter: url(#soft); }
+      .chip { fill: rgba(255,255,255,0.07); stroke: rgba(255,255,255,0.12); stroke-width: 1; rx: 13; }
+      .lineC { stroke: #56f6ff; stroke-width: 4; fill: none; marker-end: url(#arrowCyan); filter: url(#glow); }
+      .lineG { stroke: #79ffc8; stroke-width: 4; fill: none; marker-end: url(#arrowGreen); filter: url(#glow); }
+      .lineSoft { stroke: rgba(173, 219, 255, 0.35); stroke-width: 2.5; fill: none; stroke-dasharray: 8 9; }
+    </style>
+  </defs>
+
+  <rect class="page" width="1600" height="1100"/>
+  <g opacity="0.95">
+    <path class="grid" d="M0 120H1600M0 220H1600M0 320H1600M0 420H1600M0 520H1600M0 620H1600M0 720H1600M0 820H1600M0 920H1600M0 1020H1600"/>
+    <path class="grid" d="M120 0V1100M240 0V1100M360 0V1100M480 0V1100M600 0V1100M720 0V1100M840 0V1100M960 0V1100M1080 0V1100M1200 0V1100M1320 0V1100M1440 0V1100"/>
+  </g>
+  <circle cx="1280" cy="140" r="180" fill="#2b8cff" opacity="0.10"/>
+  <circle cx="250" cy="910" r="230" fill="#ff6bd6" opacity="0.08"/>
+  <circle cx="1320" cy="840" r="260" fill="#79ffc8" opacity="0.07"/>
+
+  <g transform="translate(80 70)">
+    <text class="title" x="0" y="0">人工智能日报项目：本次会话成果总览</text>
+    <text class="subtitle" x="2" y="42">目标：把可信信息源、中文日报周报、专用飞书机器人、每天自动运行和 GitHub 版本管理串成一条稳定链路</text>
+  </g>
+
+  <g transform="translate(80 160)">
+    <rect class="panel" x="0" y="0" width="1440" height="210"/>
+    <text class="section" x="34" y="48">一、信息源不是只看 X，而是多源汇流</text>
+    <g transform="translate(35 76)">
+      <rect class="chip" x="0" y="0" width="205" height="92"/>
+      <text class="label" x="20" y="34">官方与公司博客</text>
+      <text class="tiny" x="20" y="62">一手公告优先</text>
+      <rect class="chip" x="225" y="0" width="165" height="92"/>
+      <text class="label" x="245" y="34">GitHub</text>
+      <text class="tiny" x="245" y="62">发布与仓库动态</text>
+      <rect class="chip" x="410" y="0" width="150" height="92"/>
+      <text class="label" x="430" y="34">论文</text>
+      <text class="tiny" x="430" y="62">近期研究线索</text>
+      <rect class="chip" x="580" y="0" width="170" height="92"/>
+      <text class="label" x="600" y="34">视频频道</text>
+      <text class="tiny" x="600" y="62">浏览器会话采集</text>
+      <rect class="chip" x="770" y="0" width="150" height="92"/>
+      <text class="label" x="790" y="34">X 动态</text>
+      <text class="tiny" x="790" y="62">登录态会话采集</text>
+      <rect class="chip" x="940" y="0" width="180" height="92"/>
+      <text class="label" x="960" y="34">独立博客</text>
+      <text class="tiny" x="960" y="62">观点与深读入口</text>
+      <rect class="chip" x="1140" y="0" width="225" height="92"/>
+      <text class="label" x="1160" y="34">暂缓来源</text>
+      <text class="tiny" x="1160" y="62">超时或空结果先排除</text>
+    </g>
+  </g>
+
+  <g transform="translate(80 420)">
+    <rect class="panel" x="0" y="0" width="1440" height="255"/>
+    <text class="section" x="34" y="50">二、处理链路：从原始动态到中文可读报告</text>
+    <g transform="translate(55 94)">
+      <rect class="chip" x="0" y="0" width="185" height="104"/>
+      <text class="label" x="24" y="38">真实采集</text>
+      <text class="tiny" x="24" y="66">只收可验证条目</text>
+      <path class="lineC" d="M195 52H280"/>
+      <rect class="chip" x="300" y="0" width="185" height="104"/>
+      <text class="label" x="324" y="38">可信分层</text>
+      <text class="tiny" x="324" y="66">一手来源权重更高</text>
+      <path class="lineC" d="M495 52H580"/>
+      <rect class="chip" x="600" y="0" width="185" height="104"/>
+      <text class="label" x="624" y="38">去重排序</text>
+      <text class="tiny" x="624" y="66">避免噪音占版面</text>
+      <path class="lineC" d="M795 52H880"/>
+      <rect class="chip" x="900" y="0" width="185" height="104"/>
+      <text class="label" x="924" y="38">中文编辑</text>
+      <text class="tiny" x="924" y="66">带判断与来源</text>
+      <path class="lineC" d="M1095 52H1180"/>
+      <rect class="chip" x="1200" y="0" width="165" height="104"/>
+      <text class="label" x="1224" y="38">飞书输出</text>
+      <text class="tiny" x="1224" y="66">日报与周报</text>
+    </g>
+    <text class="note" x="55" y="215">日报更短，强调今天必须知道的事实；周报更深，保留长文章、播客、视频和强观点注释，适合周末深读。</text>
+  </g>
+
+  <g transform="translate(80 720)">
+    <rect class="panel" x="0" y="0" width="690" height="285"/>
+    <text class="section" x="34" y="50">三、飞书机器人职责隔离</text>
+    <g transform="translate(42 82)">
+      <rect class="chip" x="0" y="0" width="180" height="92"/>
+      <text class="label" x="20" y="34">日历机器人</text>
+      <text class="tiny" x="20" y="62">只处理日历助手</text>
+      <rect class="chip" x="205" y="0" width="180" height="92"/>
+      <text class="label" x="225" y="34">人事机器人</text>
+      <text class="tiny" x="225" y="62">只处理人事周报</text>
+      <rect x="410" y="-6" width="205" height="104" rx="18" fill="rgba(121,255,200,0.13)" stroke="#79ffc8" stroke-width="2" filter="url(#glow)"/>
+      <text class="label" x="434" y="34">内容机器人</text>
+      <text class="tiny" x="434" y="62">人工智能日报专用</text>
+    </g>
+    <path class="lineSoft" d="M450 202C500 178 560 178 612 202"/>
+    <text class="note" x="42" y="210">本次只修复内容机器人配置，其他机器人没有删除、没有改用途。</text>
+    <text class="small" x="42" y="246">关键修复：同一个人在不同飞书应用下收件人标识不同，已用统一身份换算为内容机器人的专用收件人标识。</text>
+  </g>
+
+  <g transform="translate(830 720)">
+    <rect class="panel" x="0" y="0" width="690" height="285"/>
+    <text class="section" x="34" y="50">四、自动运行与 GitHub 状态</text>
+    <g transform="translate(45 82)">
+      <rect class="chip" x="0" y="0" width="205" height="86"/>
+      <text class="label" x="22" y="34">每天九点</text>
+      <text class="tiny" x="22" y="60">本机自动任务触发</text>
+      <path class="lineG" d="M215 43H285"/>
+      <rect class="chip" x="305" y="0" width="240" height="86"/>
+      <text class="label" x="327" y="34">专用运行脚本</text>
+      <text class="tiny" x="327" y="60">拒绝错误机器人</text>
+      <path class="lineG" d="M425 94V138"/>
+      <rect class="chip" x="215" y="150" width="330" height="86"/>
+      <text class="label" x="237" y="184">代码已推送到 GitHub</text>
+      <text class="tiny" x="237" y="210">提交包含机器人锁定、来源检查和文档说明</text>
+    </g>
+  </g>
+
+  <g transform="translate(80 1030)">
+    <rect x="0" y="0" width="1440" height="1.5" fill="url(#cyan)" opacity="0.7"/>
+    <text class="tiny" x="0" y="38">当前结论：信息源采集、内容生成、飞书机器人隔离、发送验证、定时自动化和 GitHub 发布已经串通；后续只需要继续扩展可靠来源和报告质量。</text>
+  </g>
+</svg>

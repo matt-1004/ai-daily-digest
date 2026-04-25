@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.3 - 2026-04-25
+
+- 新增中文视觉总结图，说明人工智能日报的信息源工作流、飞书机器人边界、自动化和 GitHub 发布状态。
+- 在 README 中链接总结图，方便协作者快速理解当前系统。
+
 ## 0.2.2 - 2026-04-25
 
 - Lock Feishu publishing to the `content-collector-bot` app ID `cli_a92fdd8840f99bc9`.

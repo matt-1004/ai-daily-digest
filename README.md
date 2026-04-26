@@ -88,6 +88,16 @@ The Feishu publish mechanism is `lark-cli docs +update --profile content-collect
 
 Publishing is intentionally locked to that bot. If `LARK_PROFILE` points to another profile, or direct `FEISHU_APP_ID` credentials point to another app, the publisher exits before touching any Feishu document.
 
+Run the publisher smoke inspection:
+
+```bash
+bun run smoke:publisher
+```
+
+The smoke check verifies shell syntax, the local state directory, required tools, the pinned Feishu profile, Feishu CLI connectivity, a document-create dry run, unit tests, source adapters, and briefing generation without publishing the daily or weekly docs.
+
+If the scheduled wrapper cannot run, it sends a Feishu direct alert through `content-collector-bot`. By default the alert goes to the configured owner open_id in the wrapper. To override the target locally, set `AI_DAILY_DIGEST_ALERT_USER_ID` or `AI_DAILY_DIGEST_ALERT_CHAT_ID`; set `AI_DAILY_DIGEST_DISABLE_ALERT=1` only for intentional local debugging.
+
 ## Notes
 
 - Secrets are read from environment variables and should not be committed.

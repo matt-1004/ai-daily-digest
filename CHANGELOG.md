@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.4 - 2026-04-26
+
+- Add a publisher smoke inspection script for local scheduled-run readiness checks.
+- Send a Feishu cannot-run alert when the scheduled wrapper exits before publishing.
+- Document the smoke inspection and alert override environment variables.
+
 ## 0.2.3 - 2026-04-25
 
 - 新增中文视觉总结图，说明人工智能日报的信息源工作流、飞书机器人边界、自动化和 GitHub 发布状态。

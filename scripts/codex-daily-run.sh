@@ -6,10 +6,83 @@ STATE_DIR="${HOME}/.codex/ai-daily-digest"
 STATE_FILE="${STATE_DIR}/doc-targets.env"
 EXPECTED_LARK_PROFILE="content-collector-bot"
 EXPECTED_LARK_APP_ID="cli_a92fdd8840f99bc9"
+DEFAULT_ALERT_USER_ID="ou_9f302a3afbf0e9f06fe5d7ce61aa2557"
+FAILED_LINE="unknown"
+FAILED_COMMAND="unknown"
+
+send_failure_alert() {
+  local exit_code="$1"
+  local line="$2"
+  local command="$3"
+  local alert_user_id="${AI_DAILY_DIGEST_ALERT_USER_ID:-${DEFAULT_ALERT_USER_ID}}"
+  local alert_chat_id="${AI_DAILY_DIGEST_ALERT_CHAT_ID:-}"
+  local now
+  local target_args=()
+
+  if [[ "${AI_DAILY_DIGEST_DISABLE_ALERT:-}" == "1" ]]; then
+    return 0
+  fi
+
+  if ! command -v lark-cli >/dev/null 2>&1; then
+    echo "Cannot send failure alert: lark-cli is not installed or not on PATH." >&2
+    return 0
+  fi
+
+  if [[ -n "${alert_chat_id}" ]]; then
+    target_args=(--chat-id "${alert_chat_id}")
+  elif [[ -n "${alert_user_id}" ]]; then
+    target_args=(--user-id "${alert_user_id}")
+  else
+    echo "Cannot send failure alert: set AI_DAILY_DIGEST_ALERT_USER_ID or AI_DAILY_DIGEST_ALERT_CHAT_ID." >&2
+    return 0
+  fi
+
+  now="$(TZ=Asia/Shanghai date '+%Y-%m-%d %H:%M:%S %Z')"
+  local message=$'AI Daily Digest cannot run\n\nTime: '"${now}"$'\nRepo: '"${REPO_DIR}"$'\nExit code: '"${exit_code}"$'\nLine: '"${line}"$'\nCommand: '"${command}"$'\n\nRun `bun run smoke:publisher` in the repo to inspect dependencies, state path, Feishu profile, source checks, and briefing generation.'
+
+  if [[ "${AI_DAILY_DIGEST_ALERT_DRY_RUN:-}" == "1" ]]; then
+    printf '%s\n' "${message}" >&2
+    return 0
+  fi
+
+  lark-cli im +messages-send \
+    --profile "${EXPECTED_LARK_PROFILE}" \
+    --as bot \
+    "${target_args[@]}" \
+    --text "${message}" \
+    --idempotency-key "ai-daily-digest-cannot-run-$(TZ=Asia/Shanghai date '+%Y%m%d%H%M')" \
+    >/dev/null && echo "Sent AI Daily Digest failure alert." >&2 || echo "Failed to send AI Daily Digest failure alert." >&2
+}
+
+fail() {
+  local line="$1"
+  local command="$2"
+  local message="$3"
+  FAILED_LINE="${line}"
+  FAILED_COMMAND="${command}"
+  echo "${message}" >&2
+  exit 1
+}
+
+on_error() {
+  FAILED_LINE="${1:-unknown}"
+  FAILED_COMMAND="${2:-unknown}"
+}
+
+on_exit() {
+  local exit_code="$?"
+  trap - ERR EXIT
+
+  if [[ "${exit_code}" -ne 0 ]]; then
+    send_failure_alert "${exit_code}" "${FAILED_LINE}" "${FAILED_COMMAND}"
+  fi
+}
+
+trap 'on_error "$LINENO" "$BASH_COMMAND"' ERR
+trap 'on_exit' EXIT
 
 if [[ -n "${LARK_PROFILE:-}" && "${LARK_PROFILE}" != "${EXPECTED_LARK_PROFILE}" ]]; then
-  echo "Refusing to publish with LARK_PROFILE=${LARK_PROFILE}. Expected ${EXPECTED_LARK_PROFILE}." >&2
-  exit 1
+  fail "$LINENO" "validate LARK_PROFILE" "Refusing to publish with LARK_PROFILE=${LARK_PROFILE}. Expected ${EXPECTED_LARK_PROFILE}."
 fi
 
 LARK_PROFILE="${EXPECTED_LARK_PROFILE}"
@@ -21,18 +94,15 @@ chmod 700 "${STATE_DIR}"
 export PATH="${HOME}/.bun/bin:/opt/homebrew/bin:/usr/local/bin:${PATH}"
 
 if ! command -v bun >/dev/null 2>&1; then
-  echo "bun is not installed. Install it first: curl -fsSL https://bun.sh/install | bash" >&2
-  exit 1
+  fail "$LINENO" "command -v bun" "bun is not installed. Install it first: curl -fsSL https://bun.sh/install | bash"
 fi
 
 if ! command -v lark-cli >/dev/null 2>&1; then
-  echo "lark-cli is not installed or not on PATH." >&2
-  exit 1
+  fail "$LINENO" "command -v lark-cli" "lark-cli is not installed or not on PATH."
 fi
 
 if [[ ! -f "${HOME}/.lark-cli/config.json" ]]; then
-  echo "Missing ${HOME}/.lark-cli/config.json. Run lark-cli config init first." >&2
-  exit 1
+  fail "$LINENO" "test -f ${HOME}/.lark-cli/config.json" "Missing ${HOME}/.lark-cli/config.json. Run lark-cli config init first."
 fi
 
 node - "${HOME}/.lark-cli/config.json" "${EXPECTED_LARK_PROFILE}" "${EXPECTED_LARK_APP_ID}" <<'NODE'

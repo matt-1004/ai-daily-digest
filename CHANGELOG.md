@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Document business structure and data contract for the Matt Operating System map.
+
 ## 0.2.4 - 2026-04-26
 
 - Add a publisher smoke inspection script for local scheduled-run readiness checks.

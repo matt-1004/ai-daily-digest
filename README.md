@@ -104,3 +104,11 @@ If the scheduled wrapper cannot run, it sends a Feishu direct alert through `con
 - `.lark-cli-app/` is local-only runtime config and is ignored by git.
 - The current source catalog favors trust and signal over raw volume.
 - Media, podcast, Hugging Face RSS, Google DeepMind blog, and Gwern sources are intentionally excluded until they are reliable enough for scheduled runs.
+
+## Business Structure
+
+This repository is part of the Matt Operating System / Jiheniao Business OS map.
+
+- [Business structure](docs/business-structure.md)
+- [Data contract](docs/data-contract.md)
+

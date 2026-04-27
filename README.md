@@ -90,6 +90,8 @@ The Feishu publish mechanism is `lark-cli docs +update --profile content-collect
 
 Publishing is intentionally locked to that bot. If `LARK_PROFILE` points to another profile, or direct `FEISHU_APP_ID` credentials point to another app, the publisher exits before touching any Feishu document.
 
+After a successful publish, the wrapper sends a direct Feishu notice with the daily and weekly document URLs and item counts. The default target is the owner direct chat configured in the wrapper. Override with `AI_DAILY_DIGEST_NOTICE_CHAT_ID` or `AI_DAILY_DIGEST_NOTICE_USER_ID`; set `AI_DAILY_DIGEST_DISABLE_SUCCESS_NOTICE=1` only for intentional local debugging.
+
 Run the publisher smoke inspection:
 
 ```bash

@@ -9,6 +9,7 @@ LEGACY_STATE_FILE="${LEGACY_STATE_DIR}/doc-targets.env"
 EXPECTED_LARK_PROFILE="content-collector-bot"
 EXPECTED_LARK_APP_ID="cli_a92fdd8840f99bc9"
 DEFAULT_ALERT_USER_ID="ou_9f302a3afbf0e9f06fe5d7ce61aa2557"
+DEFAULT_NOTICE_CHAT_ID="oc_63cff0c889b92dc4dd7bd8541fdf0020"
 FAILED_LINE="unknown"
 FAILED_COMMAND="unknown"
 CLEANUP_DIR=""
@@ -55,6 +56,45 @@ send_failure_alert() {
     --text "${message}" \
     --idempotency-key "ai-daily-digest-cannot-run-$(TZ=Asia/Shanghai date '+%Y%m%d%H%M')" \
     >/dev/null && echo "Sent AI Daily Digest failure alert." >&2 || echo "Failed to send AI Daily Digest failure alert." >&2
+}
+
+send_success_notice() {
+  local today="$1"
+  local daily_doc_id="$2"
+  local weekly_doc_id="$3"
+  local canonical_items="$4"
+  local daily_items="$5"
+  local weekly_news="$6"
+  local weekly_deep_dives="$7"
+  local notice_chat_id="${AI_DAILY_DIGEST_NOTICE_CHAT_ID:-${DEFAULT_NOTICE_CHAT_ID}}"
+  local notice_user_id="${AI_DAILY_DIGEST_NOTICE_USER_ID:-}"
+  local target_args=()
+
+  if [[ "${AI_DAILY_DIGEST_DISABLE_SUCCESS_NOTICE:-}" == "1" ]]; then
+    return 0
+  fi
+
+  if ! command -v lark-cli >/dev/null 2>&1; then
+    echo "Cannot send success notice: lark-cli is not installed or not on PATH." >&2
+    return 0
+  fi
+
+  if [[ -n "${notice_chat_id}" ]]; then
+    target_args=(--chat-id "${notice_chat_id}")
+  elif [[ -n "${notice_user_id}" ]]; then
+    target_args=(--user-id "${notice_user_id}")
+  else
+    echo "Cannot send success notice: set AI_DAILY_DIGEST_NOTICE_CHAT_ID or AI_DAILY_DIGEST_NOTICE_USER_ID." >&2
+    return 0
+  fi
+
+  lark-cli im +messages-send \
+    --profile "${EXPECTED_LARK_PROFILE}" \
+    --as bot \
+    "${target_args[@]}" \
+    --text $'AI Daily Digest '"${today}"$' 已发布\n\n日报：https://www.feishu.cn/docx/'"${daily_doc_id}"$'\n周报：https://www.feishu.cn/docx/'"${weekly_doc_id}"$'\n\n本次生成：canonical '"${canonical_items}"$'，日报 '"${daily_items}"$'，周报新闻 '"${weekly_news}"$'，周报深度 '"${weekly_deep_dives}"$'。' \
+    --idempotency-key "ai-daily-digest-${today}-success-notice" \
+    >/dev/null && echo "Sent AI Daily Digest success notice." >&2 || echo "Failed to send AI Daily Digest success notice." >&2
 }
 
 fail() {
@@ -254,3 +294,30 @@ fs.writeFileSync(
   { mode: 0o600 },
 );
 NODE
+
+# shellcheck disable=SC1090
+source "${STATE_FILE}"
+
+node - "${WORK_DIR}/meta.json" "${FEISHU_DAILY_DOC_ID}" "${FEISHU_WEEKLY_DOC_ID}" <<'NODE' | while IFS=$'\t' read -r today canonical_items daily_items weekly_news weekly_deep_dives daily_doc_id weekly_doc_id; do
+const fs = require("node:fs");
+const [metaPath, dailyDocId, weeklyDocId] = process.argv.slice(2);
+const meta = JSON.parse(fs.readFileSync(metaPath, "utf8"));
+console.log([
+  meta.today,
+  meta.counts.canonicalItems,
+  meta.counts.dailyItems,
+  meta.counts.weeklyNews,
+  meta.counts.weeklyDeepDives,
+  dailyDocId,
+  weeklyDocId,
+].join("\t"));
+NODE
+  send_success_notice \
+    "${today}" \
+    "${daily_doc_id}" \
+    "${weekly_doc_id}" \
+    "${canonical_items}" \
+    "${daily_items}" \
+    "${weekly_news}" \
+    "${weekly_deep_dives}"
+done

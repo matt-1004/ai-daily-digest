@@ -2,9 +2,13 @@
 
 ## Unreleased
 
+## 0.2.6 - 2026-04-27
+
 - Document business structure and data contract for the Matt Operating System map.
 - Send a Feishu success notice with daily and weekly document links after scheduled publishing completes.
 - Add a Chinese infographic for the 2026-04-27 scheduled publisher recovery.
+- Route AI Daily Digest documents, success notices, and failure alerts to the configured Feishu group `oc_96d31442a4869434727e586a8ecfcad2` by default.
+- Generate and send a Codex-rendered AI Daily Digest image card after scheduled publishing.
 
 ## 0.2.5 - 2026-04-27
 

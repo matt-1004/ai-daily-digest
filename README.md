@@ -91,7 +91,7 @@ The Feishu publish mechanism is `lark-cli docs +update --profile content-collect
 
 Publishing is intentionally locked to that bot. If `LARK_PROFILE` points to another profile, or direct `FEISHU_APP_ID` credentials point to another app, the publisher exits before touching any Feishu document.
 
-After a successful publish, the wrapper sends a direct Feishu notice with the daily and weekly document URLs and item counts. The default target is the owner direct chat configured in the wrapper. Override with `AI_DAILY_DIGEST_NOTICE_CHAT_ID` or `AI_DAILY_DIGEST_NOTICE_USER_ID`; set `AI_DAILY_DIGEST_DISABLE_SUCCESS_NOTICE=1` only for intentional local debugging.
+After a successful publish, the wrapper sends a Feishu notice with the daily and weekly document URLs and item counts to the configured digest group, then sends a generated daily image card. The default target is `oc_96d31442a4869434727e586a8ecfcad2`. Override all notices with `AI_DAILY_DIGEST_TARGET_CHAT_ID`, or override success-only delivery with `AI_DAILY_DIGEST_NOTICE_CHAT_ID` / `AI_DAILY_DIGEST_NOTICE_USER_ID`; set `AI_DAILY_DIGEST_DISABLE_SUCCESS_NOTICE=1` or `AI_DAILY_DIGEST_DISABLE_IMAGE_NOTICE=1` only for intentional local debugging.
 
 Run the publisher smoke inspection:
 
@@ -101,7 +101,7 @@ bun run smoke:publisher
 
 The smoke check verifies shell syntax, the local state directory, required tools, the pinned Feishu profile, Feishu CLI connectivity, a document-create dry run, unit tests, source adapters, and briefing generation without publishing the daily or weekly docs.
 
-If the scheduled wrapper cannot run, it sends a Feishu direct alert through `content-collector-bot`. By default the alert goes to the configured owner open_id in the wrapper. To override the target locally, set `AI_DAILY_DIGEST_ALERT_USER_ID` or `AI_DAILY_DIGEST_ALERT_CHAT_ID`; set `AI_DAILY_DIGEST_DISABLE_ALERT=1` only for intentional local debugging.
+If the scheduled wrapper cannot run, it sends a Feishu alert through `content-collector-bot` to the same digest group by default. Override all notices with `AI_DAILY_DIGEST_TARGET_CHAT_ID`, or override alert-only delivery with `AI_DAILY_DIGEST_ALERT_CHAT_ID` / `AI_DAILY_DIGEST_ALERT_USER_ID`; set `AI_DAILY_DIGEST_DISABLE_ALERT=1` only for intentional local debugging.
 
 ## Notes
 

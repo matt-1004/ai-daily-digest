@@ -4,6 +4,7 @@
 
 - Document business structure and data contract for the Matt Operating System map.
 - Send a Feishu success notice with daily and weekly document links after scheduled publishing completes.
+- Add a Chinese infographic for the 2026-04-27 scheduled publisher recovery.
 
 ## 0.2.5 - 2026-04-27
 

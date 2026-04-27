@@ -1,0 +1,213 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1050" viewBox="0 0 1600 1050" role="img" aria-labelledby="title desc">
+  <title id="title">AI Daily Digest 2026-04-27 自动化修复信息图</title>
+  <desc id="desc">展示 AI Daily Digest 飞书发布器在 2026-04-27 的失败原因、修复措施、验证结果和次日预期链路。</desc>
+  <defs>
+    <linearGradient id="pageBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fbf7ef"/>
+      <stop offset="0.58" stop-color="#edf7f5"/>
+      <stop offset="1" stop-color="#fff4e6"/>
+    </linearGradient>
+    <linearGradient id="inkBand" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#123238"/>
+      <stop offset="0.48" stop-color="#0f5153"/>
+      <stop offset="1" stop-color="#263b5e"/>
+    </linearGradient>
+    <linearGradient id="teal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3ab7a5"/>
+      <stop offset="1" stop-color="#157f8c"/>
+    </linearGradient>
+    <linearGradient id="coral" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff9d6c"/>
+      <stop offset="1" stop-color="#e3564f"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffd773"/>
+      <stop offset="1" stop-color="#e8a21b"/>
+    </linearGradient>
+    <filter id="shadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#223333" flood-opacity="0.18"/>
+    </filter>
+    <filter id="smallShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#223333" flood-opacity="0.14"/>
+    </filter>
+    <marker id="arrowTeal" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="12" markerHeight="12" orient="auto-start-reverse">
+      <path d="M1 1L11 6L1 11Z" fill="#157f8c"/>
+    </marker>
+    <marker id="arrowCoral" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="12" markerHeight="12" orient="auto-start-reverse">
+      <path d="M1 1L11 6L1 11Z" fill="#e3564f"/>
+    </marker>
+    <style>
+      .bg { fill: url(#pageBg); }
+      .paper { fill: rgba(255,255,255,0.78); stroke: rgba(30,70,74,0.16); stroke-width: 1.5; rx: 28; filter: url(#shadow); }
+      .card { fill: #fffdfa; stroke: rgba(34,68,72,0.16); stroke-width: 1.4; rx: 18; filter: url(#smallShadow); }
+      .smallCard { fill: rgba(255,255,255,0.85); stroke: rgba(34,68,72,0.16); stroke-width: 1.2; rx: 14; }
+      .band { fill: url(#inkBand); rx: 28; filter: url(#shadow); }
+      .title { fill: #f9fff9; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 50px; font-weight: 850; letter-spacing: 0; }
+      .subtitle { fill: #d7eee9; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 21px; letter-spacing: 0; }
+      .kicker { fill: #ffda8a; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 18px; font-weight: 700; letter-spacing: 0; }
+      .section { fill: #123238; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 28px; font-weight: 820; letter-spacing: 0; }
+      .label { fill: #193b41; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 21px; font-weight: 760; letter-spacing: 0; }
+      .text { fill: #3e5458; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 17px; letter-spacing: 0; }
+      .muted { fill: #667b80; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 15px; letter-spacing: 0; }
+      .tiny { fill: #788b8e; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 13px; letter-spacing: 0; }
+      .metric { fill: #123238; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 40px; font-weight: 860; letter-spacing: 0; }
+      .whiteLabel { fill: #ffffff; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 19px; font-weight: 780; letter-spacing: 0; }
+      .whiteText { fill: #eaf8f3; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 15px; letter-spacing: 0; }
+      .chipText { fill: #123238; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 0; }
+      .lineTeal { stroke: #157f8c; stroke-width: 4; fill: none; marker-end: url(#arrowTeal); }
+      .lineCoral { stroke: #e3564f; stroke-width: 4; fill: none; marker-end: url(#arrowCoral); }
+      .dash { stroke: rgba(18,50,56,0.24); stroke-width: 2; fill: none; stroke-dasharray: 7 8; }
+      .dot { fill: #157f8c; }
+      .warn { fill: #e3564f; }
+      .ok { fill: #2f9b72; }
+      .gold { fill: #e8a21b; }
+      .chip { fill: rgba(255,255,255,0.82); stroke: rgba(255,255,255,0.32); stroke-width: 1; rx: 14; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1600" height="1050"/>
+  <g opacity="0.28">
+    <path d="M80 130C250 80 360 180 520 120C710 48 900 90 1080 145C1250 195 1390 120 1518 96" fill="none" stroke="#e0b15a" stroke-width="2"/>
+    <path d="M40 910C210 850 340 960 520 900C700 840 860 880 1024 940C1190 1000 1370 910 1530 934" fill="none" stroke="#3ab7a5" stroke-width="2"/>
+    <circle cx="140" cy="760" r="95" fill="#ff9d6c" opacity="0.18"/>
+    <circle cx="1350" cy="260" r="135" fill="#3ab7a5" opacity="0.16"/>
+    <circle cx="1280" cy="870" r="115" fill="#ffd773" opacity="0.24"/>
+  </g>
+
+  <g transform="translate(70 58)">
+    <rect class="band" x="0" y="0" width="1460" height="156"/>
+    <text class="kicker" x="42" y="42">AI Daily Digest / Feishu Publisher Recovery</text>
+    <text class="title" x="40" y="96">2026-04-27 自动发布修复信息图</text>
+    <text class="subtitle" x="42" y="132">从“触发了但没送达”到“发布、通知、报警、巡检”全部闭环</text>
+    <g transform="translate(1165 30)">
+      <rect class="chip" x="0" y="0" width="230" height="38"/>
+      <text class="chipText" x="18" y="25">明天 09:00 只跑一个任务</text>
+      <rect class="chip" x="0" y="52" width="230" height="38"/>
+      <text class="chipText" x="18" y="77">成功后自动飞书通知</text>
+    </g>
+  </g>
+
+  <g transform="translate(70 250)">
+    <rect class="paper" x="0" y="0" width="1460" height="260"/>
+    <text class="section" x="34" y="48">一、今天早上发生了什么</text>
+    <g transform="translate(42 82)">
+      <rect class="card" x="0" y="0" width="318" height="136"/>
+      <circle class="dot" cx="28" cy="34" r="10"/>
+      <text class="label" x="52" y="40">09:01 任务触发</text>
+      <text class="text" x="28" y="76">不是没有启动，而是启动后失败。</text>
+      <text class="muted" x="28" y="106">产生了自动化会话记录。</text>
+    </g>
+    <path class="lineCoral" d="M385 150H515"/>
+    <g transform="translate(520 82)">
+      <rect class="card" x="0" y="0" width="390" height="136"/>
+      <circle class="warn" cx="28" cy="34" r="10"/>
+      <text class="label" x="52" y="40">两个 cwd 造成混乱</text>
+      <text class="text" x="28" y="76">状态目录也被当成任务工作区。</text>
+      <text class="muted" x="28" y="106">一个目录里只有 doc-targets.env。</text>
+    </g>
+    <path class="lineCoral" d="M930 150H1060"/>
+    <g transform="translate(1065 82)">
+      <rect class="card" x="0" y="0" width="345" height="136"/>
+      <circle class="warn" cx="28" cy="34" r="10"/>
+      <text class="label" x="52" y="40">发布链路被阻断</text>
+      <text class="text" x="28" y="76">Git 代理与 Feishu DNS 同时异常。</text>
+      <text class="muted" x="28" y="106">报警也依赖飞书，因此没送达。</text>
+    </g>
+    <g transform="translate(42 220)">
+      <text class="tiny" x="0" y="0">结论：调度触发了，失败发生在运行环境与脚本设计边界，不是日报内容生成逻辑坏了。</text>
+    </g>
+  </g>
+
+  <g transform="translate(70 545)">
+    <rect class="paper" x="0" y="0" width="710" height="350"/>
+    <text class="section" x="34" y="48">二、已经补上的四道防线</text>
+    <g transform="translate(34 78)">
+      <rect class="smallCard" x="0" y="0" width="305" height="92"/>
+      <rect x="18" y="18" width="42" height="42" rx="12" fill="url(#teal)"/>
+      <text class="whiteLabel" x="31" y="47">1</text>
+      <text class="label" x="78" y="34">只保留真实仓库 cwd</text>
+      <text class="muted" x="78" y="64">避免状态目录再次启动一条任务</text>
+
+      <rect class="smallCard" x="342" y="0" width="305" height="92"/>
+      <rect x="360" y="18" width="42" height="42" rx="12" fill="url(#gold)"/>
+      <text class="whiteLabel" x="373" y="47">2</text>
+      <text class="label" x="420" y="34">状态迁到 repo-local</text>
+      <text class="muted" x="420" y="64">`.codex-state` 忽略提交且可迁移</text>
+
+      <rect class="smallCard" x="0" y="120" width="305" height="92"/>
+      <rect x="18" y="138" width="42" height="42" rx="12" fill="url(#coral)"/>
+      <text class="whiteLabel" x="31" y="167">3</text>
+      <text class="label" x="78" y="154">Git 同步默认跳过</text>
+      <text class="muted" x="78" y="184">GitHub 或代理异常不阻塞发布</text>
+
+      <rect class="smallCard" x="342" y="120" width="305" height="92"/>
+      <rect x="360" y="138" width="42" height="42" rx="12" fill="#263b5e"/>
+      <text class="whiteLabel" x="373" y="167">4</text>
+      <text class="label" x="420" y="154">成功与失败都通知</text>
+      <text class="muted" x="420" y="184">成功发链接，失败发 cannot-run</text>
+    </g>
+    <g transform="translate(34 304)">
+      <rect x="0" y="-28" width="650" height="42" rx="16" fill="#edf7f5" stroke="#cce4dc"/>
+      <text class="text" x="20" y="-2">另外：修复了日期敏感单测，避免 fixture 自然变旧后测试误挂。</text>
+    </g>
+  </g>
+
+  <g transform="translate(820 545)">
+    <rect class="paper" x="0" y="0" width="710" height="350"/>
+    <text class="section" x="34" y="48">三、明天 09:00 的预期闭环</text>
+    <g transform="translate(44 90)">
+      <rect x="0" y="0" width="130" height="72" rx="18" fill="url(#teal)"/>
+      <text class="whiteLabel" x="26" y="31">Cron</text>
+      <text class="whiteText" x="22" y="55">09:00</text>
+      <path class="lineTeal" d="M145 36H240"/>
+
+      <rect x="250" y="0" width="150" height="72" rx="18" fill="#fffdfa" stroke="#c7ded8"/>
+      <text class="label" x="282" y="31">真实仓库</text>
+      <text class="muted" x="278" y="55">single cwd</text>
+      <path class="lineTeal" d="M415 36H510"/>
+
+      <rect x="520" y="0" width="130" height="72" rx="18" fill="url(#gold)"/>
+      <text class="whiteLabel" x="548" y="31">生成</text>
+      <text class="whiteText" x="542" y="55">日报/周报</text>
+    </g>
+    <path class="dash" d="M690 126C720 160 720 210 668 236"/>
+    <g transform="translate(44 205)">
+      <rect x="0" y="0" width="150" height="72" rx="18" fill="#fffdfa" stroke="#c7ded8"/>
+      <text class="label" x="32" y="31">飞书文档</text>
+      <text class="muted" x="30" y="55">overwrite</text>
+      <path class="lineTeal" d="M165 36H260"/>
+
+      <rect x="270" y="0" width="150" height="72" rx="18" fill="url(#teal)"/>
+      <text class="whiteLabel" x="305" y="31">成功通知</text>
+      <text class="whiteText" x="297" y="55">链接 + counts</text>
+      <path class="lineTeal" d="M435 36H530"/>
+
+      <rect x="540" y="0" width="110" height="72" rx="18" fill="#263b5e"/>
+      <text class="whiteLabel" x="572" y="31">你</text>
+      <text class="whiteText" x="560" y="55">飞书收到</text>
+    </g>
+    <g transform="translate(44 305)">
+      <text class="tiny" x="0" y="0">失败路径：如果发布未完成且飞书网络可达，发送 cannot-run 报警；如果飞书网络本身不可达，报警也无法离开本机。</text>
+    </g>
+  </g>
+
+  <g transform="translate(70 925)">
+    <rect class="band" x="0" y="0" width="1460" height="82"/>
+    <g transform="translate(36 18)">
+      <text class="whiteText" x="0" y="0">已验证</text>
+      <text class="whiteLabel" x="0" y="34">bun test 37 pass</text>
+    </g>
+    <g transform="translate(310 18)">
+      <text class="whiteText" x="0" y="0">巡检</text>
+      <text class="whiteLabel" x="0" y="34">smoke:publisher 通过</text>
+    </g>
+    <g transform="translate(650 18)">
+      <text class="whiteText" x="0" y="0">实际发布</text>
+      <text class="whiteLabel" x="0" y="34">日报 8 / 周报新闻 10 / 深度 10</text>
+    </g>
+    <g transform="translate(1100 18)">
+      <text class="whiteText" x="0" y="0">GitHub</text>
+      <text class="whiteLabel" x="0" y="34">main 已推送 a5ebde4</text>
+    </g>
+  </g>
+</svg>

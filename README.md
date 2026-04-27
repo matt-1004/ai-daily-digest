@@ -34,6 +34,7 @@ docs/
 这张中文图展示当前的信息源工作流、飞书机器人隔离、定时自动化和 GitHub 发布状态：
 
 - [二零二六年四月二十五日会话成果总览](docs/session-summary-2026-04-25.svg)
+- [二零二六年四月二十七日自动化修复信息图](docs/publisher-recovery-2026-04-27.svg)
 
 ## Requirements
 

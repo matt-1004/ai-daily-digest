@@ -4,6 +4,13 @@
 
 - Document business structure and data contract for the Matt Operating System map.
 
+## 0.2.5 - 2026-04-27
+
+- Move scheduled publisher state into an ignored repo-local directory while migrating existing Feishu doc targets.
+- Skip Git sync by default so a stale local proxy or GitHub network failure does not block publishing; set `AI_DAILY_DIGEST_GIT_SYNC=1` to opt into best-effort sync.
+- Preserve the failure-alert exit handler after temporary workspace creation.
+- Keep the scheduled automation on the real repository checkout only, avoiding duplicate runs from the state directory.
+
 ## 0.2.4 - 2026-04-26
 
 - Add a publisher smoke inspection script for local scheduled-run readiness checks.

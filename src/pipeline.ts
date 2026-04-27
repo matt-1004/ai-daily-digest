@@ -29,11 +29,12 @@ export function buildBriefings(
     return rightTime - leftTime;
   });
 
-  const dailySelection = selectDailyItems(canonicalItems, options.dailyLimit);
+  const dailySelection = selectDailyItems(canonicalItems, options.dailyLimit, options.now);
   const weeklySelection = selectWeeklyItems(
     canonicalItems,
     options.weeklyNewsLimit,
     options.weeklyDeepDiveLimit,
+    options.now,
   );
 
   return {

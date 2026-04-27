@@ -2,7 +2,7 @@
 set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-STATE_DIR="${HOME}/.codex/ai-daily-digest"
+STATE_DIR="${AI_DAILY_DIGEST_STATE_DIR:-${REPO_DIR}/.codex-state/ai-daily-digest}"
 EXPECTED_LARK_PROFILE="content-collector-bot"
 EXPECTED_LARK_APP_ID="cli_a92fdd8840f99bc9"
 
@@ -18,6 +18,9 @@ chmod 700 "${STATE_DIR}"
 test -w "${STATE_DIR}"
 touch "${STATE_DIR}/.smoke-write"
 rm -f "${STATE_DIR}/.smoke-write"
+
+echo "checking git preflight is non-blocking"
+git rev-parse --is-inside-work-tree >/dev/null
 
 echo "checking local dependencies"
 command -v bun >/dev/null

@@ -79,10 +79,12 @@ bun run publish:codex
 
 The wrapper is intended for local scheduled execution. It:
 
-- fast-forwards the checked out upstream branch before publishing
+- publishes from the current local checkout
 - uses the `content-collector-bot` lark-cli profile and refuses accidental profile changes
-- stores created Feishu document targets in `~/.codex/ai-daily-digest/doc-targets.env`
+- stores created Feishu document targets in `.codex-state/ai-daily-digest/doc-targets.env`
 - overwrites the same daily and weekly documents on later runs
+
+If the legacy target file exists at `~/.codex/ai-daily-digest/doc-targets.env`, the wrapper migrates it into the repo-local state directory on first run. Git sync is skipped by default so a stale local proxy or GitHub outage cannot block publishing; set `AI_DAILY_DIGEST_GIT_SYNC=1` only when you explicitly want a best-effort pull/fetch before publishing.
 
 The Feishu publish mechanism is `lark-cli docs +update --profile content-collector-bot --as bot`, so scheduled runs update the existing docs as that bot instead of sending IM messages. The wrapper also verifies that `content-collector-bot` points to app ID `cli_a92fdd8840f99bc9`.
 
@@ -111,4 +113,3 @@ This repository is part of the Matt Operating System / Jiheniao Business OS map.
 
 - [Business structure](docs/business-structure.md)
 - [Data contract](docs/data-contract.md)
-

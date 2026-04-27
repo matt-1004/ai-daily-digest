@@ -100,6 +100,7 @@ export interface BriefingOptions {
   dailyLimit: number;
   weeklyNewsLimit: number;
   weeklyDeepDiveLimit: number;
+  now?: Date;
 }
 
 export interface BriefingResult {

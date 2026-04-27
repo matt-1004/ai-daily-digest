@@ -13,6 +13,8 @@ import {
   xRumor,
 } from "./fixtures/candidates.ts";
 
+const TEST_NOW = new Date("2026-04-24T09:00:00.000Z");
+
 describe("daily selection", () => {
   test("selects only verified factual items for the daily digest", () => {
     const selection = selectDailyItems(
@@ -25,6 +27,7 @@ describe("daily selection", () => {
         xRumor,
       ],
       3,
+      TEST_NOW,
     );
 
     expect(selection.leadItems.map((item) => item.id)).toEqual([
@@ -53,6 +56,7 @@ describe("weekly selection", () => {
       ],
       3,
       3,
+      TEST_NOW,
     );
 
     expect(selection.verifiedNews.map((item) => item.id)).toEqual([

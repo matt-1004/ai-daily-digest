@@ -2,13 +2,16 @@
 set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-STATE_DIR="${HOME}/.codex/ai-daily-digest"
+LEGACY_STATE_DIR="${HOME}/.codex/ai-daily-digest"
+STATE_DIR="${AI_DAILY_DIGEST_STATE_DIR:-${REPO_DIR}/.codex-state/ai-daily-digest}"
 STATE_FILE="${STATE_DIR}/doc-targets.env"
+LEGACY_STATE_FILE="${LEGACY_STATE_DIR}/doc-targets.env"
 EXPECTED_LARK_PROFILE="content-collector-bot"
 EXPECTED_LARK_APP_ID="cli_a92fdd8840f99bc9"
 DEFAULT_ALERT_USER_ID="ou_9f302a3afbf0e9f06fe5d7ce61aa2557"
 FAILED_LINE="unknown"
 FAILED_COMMAND="unknown"
+CLEANUP_DIR=""
 
 send_failure_alert() {
   local exit_code="$1"
@@ -73,6 +76,10 @@ on_exit() {
   local exit_code="$?"
   trap - ERR EXIT
 
+  if [[ -n "${CLEANUP_DIR}" ]]; then
+    rm -rf "${CLEANUP_DIR}"
+  fi
+
   if [[ "${exit_code}" -ne 0 ]]; then
     send_failure_alert "${exit_code}" "${FAILED_LINE}" "${FAILED_COMMAND}"
   fi
@@ -90,6 +97,11 @@ export LARK_PROFILE
 
 mkdir -p "${STATE_DIR}"
 chmod 700 "${STATE_DIR}"
+
+if [[ ! -f "${STATE_FILE}" && -f "${LEGACY_STATE_FILE}" ]]; then
+  cp "${LEGACY_STATE_FILE}" "${STATE_FILE}"
+  chmod 600 "${STATE_FILE}"
+fi
 
 export PATH="${HOME}/.bun/bin:/opt/homebrew/bin:/usr/local/bin:${PATH}"
 
@@ -129,17 +141,21 @@ fi
 
 cd "${REPO_DIR}"
 
-if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+if [[ "${AI_DAILY_DIGEST_GIT_SYNC:-}" == "1" ]] && git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   UPSTREAM_BRANCH="$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null || true)"
   if [[ -n "${UPSTREAM_BRANCH}" ]]; then
-    git pull --ff-only
+    if ! GIT_TERMINAL_PROMPT=0 git -c http.proxy= -c https.proxy= pull --ff-only; then
+      echo "Warning: git pull failed; continuing with local checkout." >&2
+    fi
   else
-    git fetch origin main
+    if ! GIT_TERMINAL_PROMPT=0 git -c http.proxy= -c https.proxy= fetch origin main; then
+      echo "Warning: git fetch failed; continuing with local checkout." >&2
+    fi
   fi
 fi
 
 WORK_DIR="$(mktemp -d)"
-trap 'rm -rf "${WORK_DIR}"' EXIT
+CLEANUP_DIR="${WORK_DIR}"
 
 bun --eval '
   import { formatShanghaiDate, generateCurrentBriefings } from "./src/index.ts";

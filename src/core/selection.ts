@@ -5,15 +5,18 @@ import { evaluateVerification } from "./verification.ts";
 export function selectDailyItems(
   candidates: CandidateItem[],
   limit: number,
+  now = new Date(),
 ): DailySelection {
-  const sortedCandidates = [...candidates].sort(compareEditorialPriority);
+  const sortedCandidates = [...candidates].sort((left, right) =>
+    compareEditorialPriority(left, right, now),
+  );
   const leadItems: CandidateItem[] = [];
   const rejectedItems: CandidateItem[] = [];
   const seenBriefs = new Set<string>();
 
   for (const candidate of sortedCandidates) {
     const decision = evaluateVerification(candidate);
-    const editorial = assessEditorialValue(candidate);
+    const editorial = assessEditorialValue(candidate, now);
 
     if (
       decision.dailyEligible &&
@@ -36,8 +39,11 @@ export function selectWeeklyItems(
   candidates: CandidateItem[],
   newsLimit: number,
   deepDiveLimit: number,
+  now = new Date(),
 ): WeeklySelection {
-  const sortedCandidates = [...candidates].sort(compareEditorialPriority);
+  const sortedCandidates = [...candidates].sort((left, right) =>
+    compareEditorialPriority(left, right, now),
+  );
   const verifiedNews: CandidateItem[] = [];
   const deepDives: CandidateItem[] = [];
   const watchlist: CandidateItem[] = [];
@@ -45,7 +51,7 @@ export function selectWeeklyItems(
 
   for (const candidate of sortedCandidates) {
     const decision = evaluateVerification(candidate);
-    const editorial = assessEditorialValue(candidate);
+    const editorial = assessEditorialValue(candidate, now);
 
     if (
       decision.status === "verified" &&

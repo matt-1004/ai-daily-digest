@@ -2,6 +2,7 @@
 .env
 .env.*
 .lark-cli-app/
+.codex-state/
 node_modules/
 coverage/
 dist/

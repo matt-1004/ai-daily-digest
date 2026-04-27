@@ -23,6 +23,7 @@ describe("briefing pipeline", () => {
         dailyLimit: 5,
         weeklyNewsLimit: 5,
         weeklyDeepDiveLimit: 5,
+        now: new Date("2026-04-24T09:00:00.000Z"),
       },
       "生成时间：2026-04-23 09:00 Asia/Shanghai",
     );

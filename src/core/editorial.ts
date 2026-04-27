@@ -418,13 +418,13 @@ function buildWhyImportant(text: string, category: EditorialCategory): string {
   return "这是值得跟踪的行业信号，后续要看它是否形成持续产品化或生态扩散。";
 }
 
-export function assessEditorialValue(item: CandidateItem): EditorialAssessment {
+export function assessEditorialValue(item: CandidateItem, now = new Date()): EditorialAssessment {
   const text = getCandidateText(item);
   const category = detectCategory(item, text);
   const relevanceScore = computeRelevanceScore(item, text);
   const impactScore = computeImpactScore(item, text, category);
   const score = relevanceScore + impactScore;
-  const ageDays = getAgeDays(item.publishedAt);
+  const ageDays = getAgeDays(item.publishedAt, now);
   const guideLikeContent =
     item.url.includes("/podcast/") ||
     item.url.includes("/academy/") ||
@@ -457,9 +457,13 @@ export function assessEditorialValue(item: CandidateItem): EditorialAssessment {
   };
 }
 
-export function compareEditorialPriority(left: CandidateItem, right: CandidateItem): number {
-  const leftAssessment = assessEditorialValue(left);
-  const rightAssessment = assessEditorialValue(right);
+export function compareEditorialPriority(
+  left: CandidateItem,
+  right: CandidateItem,
+  now = new Date(),
+): number {
+  const leftAssessment = assessEditorialValue(left, now);
+  const rightAssessment = assessEditorialValue(right, now);
 
   if (rightAssessment.score !== leftAssessment.score) {
     return rightAssessment.score - leftAssessment.score;
